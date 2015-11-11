@@ -9,7 +9,7 @@ getLatestReleaseCount("plugin.video.gong.play", "#gong_count");
 getReleases("plugin.video.free.bgtvs", "#bgtvs");
 getReleases("plugin.video.gong.play", "#gong");
 
-function getReleases(url, update_element){
+function getReleases(repo_name, update_element){
 	$.getJSON("https://api.github.com/repos/harrygg/" + repo_name + "/releases", function (data) {
 		$.each( data, function( i, item ) {
 			var name = item['assets'][0]['name']
