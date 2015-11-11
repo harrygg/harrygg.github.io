@@ -1,41 +1,11 @@
-<h1>Harry GG Kodi Addons</h1>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script>
-$.getJSON("https://api.github.com/repos/harrygg/plugin.video.free.bgtvs/releases/latest", function (data) {
-	var count = data['assets'][0]['download_count']
-  $("#bgtvs_count").html(count);
-});
-$.getJSON("https://api.github.com/repos/harrygg/plugin.video.gong.play/releases/latest", function (data) {
-	var count = data['assets'][0]['download_count']
-  $("#gong_count").html(count);
-});
-
-var url = "https://api.github.com/repos/harrygg/plugin.video.free.bgtvs/releases"
-getReleases(url, "#bgtvs");
-var url = "https://api.github.com/repos/harrygg/plugin.video.gong.play/releases"
-getReleases(url, "#gong");
-
-function getReleases(url, update_element){
-	$.getJSON(url, function (data) {
-		$.each( data, function( i, item ) {
-			var name = item['assets'][0]['name']
-			var count = item['assets'][0]['download_count']
-			var created_at = item['assets'][0]['created_at']
-			$(update_element).append("<b>Name: </b>" + name + "<b><br />Downloaded: </b>" + count + " times<br />" + "<b>Created at</b>: " + created_at + "<br /><br />");
-		});
-	});
-}
-
-</script>
-
-<div id="gong"><b>Play.Gong.Bg</b><br />
-Latest version of the addon <a href="https://github.com/harrygg/plugin.video.gong.play" target="_blank">plugin.video.gong.play</a> was downloaded <span id="bgtvs_count"></span> times
-<br />
-<br />
-</div>
-<br />
-<div id="bgtvs"><b>Free.BGTVs</b><br />
-Latest version of the addon <a href="https://github.com/harrygg/plugin.video.free.bgtvs" target="_blank">plugin.video.free.bgtvs</a> was downloaded <span id="bgtvs_count"></span> times
-<br />
-<br />
-</div>
+<html>
+<head>
+<title>Harry GG Kodi Addons</title>
+</head>
+<body>
+	<h1>Harry GG Kodi Addons</h1>
+	<br />
+		<a href="stats.html">Download stats</a>
+	</div>
+</body>
+</html>
