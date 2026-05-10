@@ -24,6 +24,48 @@
       text-decoration: underline;
     }
 
+    .copy-url {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #eef5ff;
+      color: #0645ad;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #c7d8f6;
+      text-decoration: none;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .copy-button {
+      font-size: 0.9rem;
+      padding: 4px 8px;
+      border: 1px solid #007BFF;
+      background-color: #fff;
+      color: #007BFF;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .copy-button:hover {
+      background-color: #e6f0ff;
+    }
+
+    .copy-button:active {
+      background-color: #d0e0ff;
+    }
+
+    .copy-button.copy-success {
+      background-color: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+    }
+
+    .copy-button.copy-failed {
+      background-color: #f8d7da;
+      border-color: #dc3545;
+      color: #721c24;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -173,6 +215,28 @@
         grabbersTableElement.appendChild(row);
       }
     };
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      const button = document.activeElement && document.activeElement.tagName === 'BUTTON' ? document.activeElement : null;
+      navigator.clipboard.writeText(text).then(() => {
+        if (button) {
+          const originalText = button.textContent;
+          button.textContent = 'Copied!';
+          setTimeout(() => {
+            button.textContent = originalText;
+          }, 300);
+        }
+      }).catch(() => {
+        if (button) {
+          const originalText = button.textContent;
+          button.textContent = 'Failed';
+          setTimeout(() => {
+            button.textContent = originalText;
+          }, 300);
+        }
+      });
+    }
   </script>
 </head>
 <body>
@@ -187,16 +251,42 @@
 
 
     <h3>Линкове за сваляне на програмния справочник: </h3>
-  <p>
-  Всички канали: <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/all-3days.full.epg.xml.gz">3 дневно, с всички възможни детайли</a> | <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/all-3days.details.epg.xml.gz">3 дневно, само с описание</a> | <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/all-3days.basic.epg.xml.gz">3 дневно, без детайли</a> | <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/all-2days.full.epg.xml.gz">2 дневно, с всички детайли</a>| <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/all-2days.full.epg.xml.gz">2 дневно, без детайли</a><br>
-   TiVi.bg: <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/tivibg.xml.gz">3 дневно, с всички възможни детайли</a><br>
-    A1: <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/a1.xml.gz">3 дневно, с всички възможни детайли</a><br>
-    Vivacom: <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/vivacom.xml.gz">3 дневно, с всички възможни детайли</a><br>
-	
-    Всички български канали <a href="https://github.com/harrygg/EPG/raw/refs/heads/master/bulgarian.3days.full.epg.xml.gz">3 дневно, с всички възможни детайли</a><br>
-    Всички спортни канали: <a href="https://raw.githubusercontent.com/harrygg/EPG/refs/heads/master/sport.epg.xml">3 дневно, с всички възможни детайли</a><br>
-  </p>
+  <div>
+    <strong>С всички възможни канали:</strong>
+    <ul>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/epg.xml.gz">epg.xml.gz</a> <span class="copy-url" id="epg.xml.gz">https://is.gd/fullepg</span> <button class="copy-button" onclick="copyToClipboard('epg.xml.gz')">Copy</button></li>
+    </ul>
+    <strong>С канали от доставчици:</strong>
+   <ul>
+      <li>TiVi.bg: <a href="https://github.com/harrygg/EPG/releases/latest/download/tivibg.xml.gz">3 дневно, с всички възможни детайли</a> <span class="copy-url" id="tivibgUrl">https://is.gd/tivibgepg</span> <button class="copy-button" onclick="copyToClipboard('tivibgUrl')">Copy</button></li>
+      <li>A1: <a href="https://github.com/harrygg/EPG/releases/latest/download/a1.xml.gz">3 дневно, с всички възможни детайли</a> <span class="copy-url" id="a1Url">https://is.gd/a1bgepg</span> <button class="copy-button" onclick="copyToClipboard('a1Url')">Copy</button></li>
+      <li>Vivacom: <a href="https://github.com/harrygg/EPG/releases/latest/download/vivacom.xml.gz">3 дневно, с всички възможни детайли</a> <span class="copy-url" id="vivacomUrl">https://is.gd/vivaepg</span> <button class="copy-button" onclick="copyToClipboard('vivacomUrl')">Copy</button></li>
+    </ul>
 
+    <strong>С всички канали:</strong>
+    <ul>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/all-3days.full.epg.xml.gz">3 дневно, с всички възможни детайли</a> <span class="copy-url" id="3daysepg">https://is.gd/3daysepg</span> <button class="copy-button" onclick="copyToClipboard('3daysepg')">Copy</button></li>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/all-3days.details.epg.xml.gz">3 дневно, само с описание</a> <span class="copy-url" id="3daysdetails">https://is.gd/3daysdetailsepg</span> <button class="copy-button" onclick="copyToClipboard('3daysdetails')">Copy</button></li>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/all-3days.basic.epg.xml.gz">3 дневно, без детайли</a> <span class="copy-url" id="3daysbasic">https://is.gd/3daysbasicepg</span> <button class="copy-button" onclick="copyToClipboard('3daysbasic')">Copy</button></li>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/all-2days.full.epg.xml.gz">2 дневно, с всички детайли</a> <span class="copy-url" id="2daysepg">https://is.gd/2daysepg</span> <button class="copy-button" onclick="copyToClipboard('2daysepg')">Copy</button></li>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/all-2days.details.epg.xml.gz">2 дневно, само с описание</a> <span class="copy-url" id="2daysdetails">https://is.gd/2daysdetailsepg</span> <button class="copy-button" onclick="copyToClipboard('2daysdetails')">Copy</button></li>
+      <li><a href="https://github.com/harrygg/EPG/releases/latest/download/all-2days.basic.epg.xml.gz">2 дневно, без детайли</a> <span class="copy-url" id="2daysbasic">https://is.gd/2daysbasicepg</span> <button class="copy-button" onclick="copyToClipboard('2daysbasic')">Copy</button></li>
+    </ul>
+
+    <strong>Само български канали:</strong>
+    <ul>
+      <li>
+        <a href="https://github.com/harrygg/EPG/releases/latest/download/bulgarian.3days.full.epg.xml.gz">3 дневно, с всички </a> <span class="copy-url" id="bulgarian3days">https://is.gd/bg3daysepg</span> <button class="copy-button" onclick="copyToClipboard('bulgarian3days')">Copy</button>
+      </li>
+    </ul>
+<strong>Само спортни канали:</strong>
+    <ul>
+      <li>
+        <a href="https://github.com/harrygg/EPG/releases/latest/download/sport.epg.xml.gz">3 дневно, с всички възможни детайли</a> <span class="copy-url" id="sportepg">https://is.gd/sportepg</span> <button class="copy-button" onclick="copyToClipboard('sportepg')">Copy</button>
+      </li>
+    </ul>
+
+  </div>
   <h3>Списък на всички канали</h3>
   <table id="channels">
     <thead>
